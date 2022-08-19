@@ -31,6 +31,16 @@ class InventarioDAO():
         cursor.execute(SQL, [id])
         conn.commit()
         conn.close()
+        
+    def valores():
+        conn = connect()
+        cursor = conn.cursor()
+        SQL = "SELECT SUM(valor) FROM inventario;"
+        cursor.execute(SQL)
+        valorTotal = cursor.fetchall()
+        conn.close()
+        
+        return valorTotal
     
     def selectALL():
         items_lst = []

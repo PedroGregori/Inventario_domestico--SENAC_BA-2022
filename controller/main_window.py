@@ -13,18 +13,29 @@ class MainWindow(QMainWindow):
         
         self.addBtn.clicked.connect(self.add)
         self.editBtn.clicked.connect(self.edit)
-        self.delBtn.clicked.connect(self.delete)    
+        self.delBtn.clicked.connect(self.delete)
+        self.addBtn.clicked.connect(self.valores)
+        self.editBtn.clicked.connect(self.valores)
+        self.delBtn.clicked.connect(self.valores)    
         
         self.tabela.horizontalHeader().setStretchLastSection(True) 
         self.tabela.horizontalHeader().setSectionResizeMode( 
             QHeaderView.Stretch)
         
         self.loadData()
+        self.valores()
+        
         
     def loadData(self):
         items_lst = invDAO.selectALL()
         for i in items_lst:
             self.addTableItem(i)
+        
+    def valores(self):
+        valorTotal = invDAO.valores()
+        valorTratado = valorTotal[0]
+        qtd = len(invDAO.selectALL())
+        self.avisos(valorTratado[0],str(qtd))
         
     def add(self):
         nome = self.nome.text()
@@ -47,11 +58,24 @@ class MainWindow(QMainWindow):
         self.valor.clear()
         self.numSerie.clear()
             
+    def avisos(self, valor, quantidade):
+        self.valorTotal.setText(f"R$ {valor}")
+        self.qtd.setText(quantidade)
         
-        
+    """def fill_fields(self, line):
+        nome = self.tabela.item(line, 1)
+        sala = self.tabela.item(line, 2)
+        descricao = self.tabela.item(line, 3) 
+        marca = self.tabela.item(line, 4)
+        data = self.tabela.item(line, 5)
+        valor = self.tabela.item(line, 6)
+        serie = self.tabela.item(line, 7)
+        self.nome.setText(nome.text())"""
+    
     def edit(self):
         lineSel = self.tabela.currentRow()
         lineItem = self.tabela.item(lineSel, 0)
+        #self.fill_fields(lineSel)
         id = lineItem.text()
         nome = self.nome.text()
         sala = self.sala.text()

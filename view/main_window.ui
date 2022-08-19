@@ -469,6 +469,19 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>nome</tabstop>
+  <tabstop>sala</tabstop>
+  <tabstop>descricao</tabstop>
+  <tabstop>marca</tabstop>
+  <tabstop>data</tabstop>
+  <tabstop>valor</tabstop>
+  <tabstop>numSerie</tabstop>
+  <tabstop>addBtn</tabstop>
+  <tabstop>editBtn</tabstop>
+  <tabstop>delBtn</tabstop>
+  <tabstop>tabela</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
