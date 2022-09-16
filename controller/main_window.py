@@ -16,11 +16,13 @@ class MainWindow(QMainWindow):
         self.delBtn.clicked.connect(self.delete)
         self.addBtn.clicked.connect(self.valores)
         self.editBtn.clicked.connect(self.valores)
-        self.delBtn.clicked.connect(self.valores)    
+        self.delBtn.clicked.connect(self.valores)  
+        
+        self.tabela.cellClicked.connect(self.fill_fields)
         
         self.tabela.horizontalHeader().setStretchLastSection(True) 
-        self.tabela.horizontalHeader().setSectionResizeMode( 
-            QHeaderView.Stretch)
+        self.tabela.horizontalHeader().setSectionResizeMode( QHeaderView.Stretch)
+        self.tabela.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
         
         self.loadData()
         self.valores()
@@ -62,20 +64,21 @@ class MainWindow(QMainWindow):
         self.valorTotal.setText(f"R$ {valor}")
         self.qtd.setText(quantidade)
         
-    """def fill_fields(self, line):
-        nome = self.tabela.item(line, 1)
-        sala = self.tabela.item(line, 2)
-        descricao = self.tabela.item(line, 3) 
-        marca = self.tabela.item(line, 4)
-        data = self.tabela.item(line, 5)
-        valor = self.tabela.item(line, 6)
-        serie = self.tabela.item(line, 7)
-        self.nome.setText(nome.text())"""
+    def fill_fields(self):
+        lineSel = self.tabela.currentRow()
+        
+        self.nome.setText(self.tabela.item(lineSel, 1).text())
+        self.sala.setText(self.tabela.item(lineSel, 2).text())
+        self.descricao.setText(self.tabela.item(lineSel, 3) .text())
+        self.marca.setText(self.tabela.item(lineSel, 4).text())
+        #self.data.setText(self.tabela.item(lineSel, 5).text())
+        self.valor.setText(self.tabela.item(lineSel, 6).text())
+        self.numSerie.setText(self.tabela.item(lineSel, 7).text())
+        
     
     def edit(self):
         lineSel = self.tabela.currentRow()
         lineItem = self.tabela.item(lineSel, 0)
-        #self.fill_fields(lineSel)
         id = lineItem.text()
         nome = self.nome.text()
         sala = self.sala.text()
